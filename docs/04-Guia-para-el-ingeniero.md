@@ -39,7 +39,8 @@ docs/                                ← este material
 5. Implementar `baseReal` con las mismas cinco funciones que `baseFalsa` (`listar`, `obtener`, `insertar`, `actualizar`, `eliminar`). Hay un ejemplo comentado en el archivo.
 6. En `api.js` cambiar `const fuente = baseFalsa` por `baseReal`.
 7. **Importante:** la base falsa es síncrona; Supabase es asíncrono. Las páginas llaman `api.listar(...)` sin `await`. Al migrar, convertir esas llamadas a `await` (están concentradas en los siete archivos de página y en `avanceMenor` de `api.js`). Es trabajo mecánico; no cambia la lógica.
-8. Autenticación: sustituir `auth.js` por Supabase Auth (correo + contraseña o enlace mágico). La tabla `perfiles` lleva `auth_id` para ligar cada perfil a su usuario de Auth; la página de acceso deja de mostrar perfiles de prueba.
+8. Acceso de demostración: en `base-falsa.js` → `accesos_demo` está el correo y la clave con los que la dueña entra a la demo y elige vista. Es solo para la demo (no hay cuenta real detrás). Al conectar Auth, eliminarlo.
+9. Autenticación: sustituir `auth.js` por Supabase Auth (correo + contraseña o enlace mágico). La tabla `perfiles` lleva `auth_id` para ligar cada perfil a su usuario de Auth; la página de acceso deja de mostrar perfiles de prueba.
 
 ## 5. Seguridad que ya está prevista
 - RLS activo en todas las tablas de datos personales. Las políticas de la migración 0001 implementan la regla «cada perfil ve solo lo suyo» (ver `docs/01-Arquitectura.md` § 3). Revisarlas y probarlas con usuarios reales antes de abrir la plataforma.

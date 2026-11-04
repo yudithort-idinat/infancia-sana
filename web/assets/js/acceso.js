@@ -51,16 +51,37 @@ document.addEventListener('click', (e) => {
   setTimeout(() => { location.href = PAGINA_POR_ROL[p.rol]; }, 400);
 });
 
-// El formulario de correo/contraseña es ilustrativo: si el correo coincide con un perfil de prueba, entra.
+// Formulario de correo/contraseña (demo):
+// - Con el acceso de la dueña (correo + clave de accesos_demo) se abre el selector de vistas.
+// - Con el correo de un perfil de prueba entra directo a su espacio (sin contraseña).
+const accesos = api.listar('accesos_demo');
 $('#form-acceso').addEventListener('submit', (e) => {
   e.preventDefault();
   const correo = $('#a-correo').value.trim().toLowerCase();
-  const p = perfiles.find((x) => x.correo === correo);
+  const clave = $('#a-clave').value;
   if (!correo) { aviso('Escribe tu correo o elige un perfil de prueba', 'error'); return; }
+  const duena = accesos.find((a) => a.correo === correo);
+  if (duena) {
+    if (clave !== duena.clave) { aviso('Contraseña incorrecta', 'error'); $('#a-clave').focus(); return; }
+    sessionStorage.setItem('infancia_duena', duena.nombre);
+    aviso(`Bienvenida, ${duena.nombre}`, 'ok');
+    mostrarSelector(duena.nombre);
+    return;
+  }
+  const p = perfiles.find((x) => x.correo === correo);
   if (!p) { aviso('Ese correo no está en los perfiles de prueba. Elige uno de abajo.', 'error'); return; }
   entrar(p.id);
   location.href = PAGINA_POR_ROL[p.rol];
 });
+
+function mostrarSelector(nombre) {
+  const av = $('#acceso-aviso');
+  av.textContent = `Hola, ${nombre}. Elige qué vista quieres recorrer; puedes volver aquí y cambiar de perfil cuando quieras.`;
+  av.classList.remove('oculto');
+  $('#form-acceso').reset();
+  document.getElementById('perfiles-prueba').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+if (sessionStorage.getItem('infancia_duena') && !sesionActual()) mostrarSelector(sessionStorage.getItem('infancia_duena'));
 
 // Si ya hay sesión, ofrecemos ir directo
 const s = sesionActual();

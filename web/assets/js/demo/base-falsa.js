@@ -4,7 +4,7 @@
 // Cuando se conecte Supabase, este archivo deja de usarse: api.js cambia de fuente.
 // Si cambias la semilla, sube VER para que los navegadores recarguen los datos.
 
-export const VER = 'infancia_demo_v1';
+export const VER = 'infancia_demo_v2';
 
 const hoy = new Date();
 const dia = (n) => { const d = new Date(hoy); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
@@ -16,6 +16,13 @@ export function semilla() {
       { id: 'org-escuela', nombre: 'Escuela Primaria Ejemplo', tipo: 'escuela' },
       { id: 'org-ac', nombre: 'Fundación Ejemplo, A.C.', tipo: 'ac' },
       { id: 'org-gobierno', nombre: 'Dirección de Salud Municipal (ejemplo)', tipo: 'gobierno' },
+    ],
+
+    // ---------- Acceso de la dueña a la demostración ----------
+    // Solo para la demo: al entrar con este correo y clave se abre el selector de vistas.
+    // No es una cuenta real; las cuentas reales las creará el ingeniero con Supabase Auth.
+    accesos_demo: [
+      { id: 'duena', correo: 'yudithort@gmail.com', clave: '123456', nombre: 'Yudith' },
     ],
 
     // ---------- Perfiles de prueba ----------
