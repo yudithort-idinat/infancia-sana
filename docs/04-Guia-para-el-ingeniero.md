@@ -25,16 +25,17 @@ supabase/migrations/0001_nucleo.sql  ← esquema propuesto + RLS
 docs/                                ← este material
 ```
 
-## 3. Publicar la demo (GitHub Pages)
-1. Subir el repositorio a la cuenta de GitHub de MYO Genetics.
-2. Settings → Pages → Source: *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
-3. La demo queda en `https://<usuario>.github.io/<repo>/web/index.html`. (Si se quiere sin `/web/`, mover el contenido de `web/` a la raíz o agregar un `index.html` raíz que redirija.)
+## 3. Dónde está publicado (hecho el 3-nov-2026)
+- **Repositorio:** `https://github.com/yudithort-idinat/infancia-sana` (cuenta de MYO Genetics). Un `git push` a `main` republica la demo en uno o dos minutos.
+- **Demo pública (GitHub Pages):** `https://yudithort-idinat.github.io/infancia-sana/` → redirige a `web/index.html`. Configurado en Settings → Pages: *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
+- **Supabase:** proyecto `oraiojohfzfjmdrldlcu` en la organización de MYO Genetics (`https://oraiojohfzfjmdrldlcu.supabase.co`, plan Free, región us-east-2). Ya tiene aplicadas la migración `0001_nucleo.sql` (19 tablas, RLS con 38 políticas) y la semilla `semilla.sql` (5 servicios, 4 objetivos, 12 semanas). La migración está registrada en `supabase_migrations.schema_migrations`.
+- ⚠️ El plan Free **pausa el proyecto tras una semana sin uso**; se reanuda desde el tablero con un clic (los datos se conservan). Mientras la demo corra con la base falsa, es normal que esté pausado.
 
-## 4. Conectar la base real (Supabase)
-1. Crear el proyecto en la cuenta de Supabase de MYO Genetics.
-2. Ejecutar `supabase/migrations/0001_nucleo.sql` en el SQL Editor (crea tablas, catálogos y políticas RLS). Las migraciones siguientes se numeran 0002, 0003… y **una migración aplicada no se edita**.
-3. Cargar datos iniciales: `supabase/seed/semilla.sql` (catálogos y programa de 12 semanas; sin personas reales).
-4. En `web/assets/js/supabase.js` poner la URL del proyecto y la **llave pública (anon)**. Nunca la llave de servicio.
+## 4. Conectar la base real (Supabase) — lo que sigue
+1. ~~Crear el proyecto~~ Hecho.
+2. ~~Ejecutar `0001_nucleo.sql`~~ Hecho. Las migraciones siguientes se numeran 0002, 0003… y **una migración aplicada no se edita**.
+3. ~~Cargar `semilla.sql`~~ Hecho.
+4. En `web/assets/js/supabase.js` ya está la URL del proyecto. Falta pegar la **llave pública** (Project Settings → API Keys → *anon* o *publishable*). Nunca la llave de servicio (*service_role* / *secret*).
 5. Implementar `baseReal` con las mismas cinco funciones que `baseFalsa` (`listar`, `obtener`, `insertar`, `actualizar`, `eliminar`). Hay un ejemplo comentado en el archivo.
 6. En `api.js` cambiar `const fuente = baseFalsa` por `baseReal`.
 7. **Importante:** la base falsa es síncrona; Supabase es asíncrono. Las páginas llaman `api.listar(...)` sin `await`. Al migrar, convertir esas llamadas a `await` (están concentradas en los siete archivos de página y en `avanceMenor` de `api.js`). Es trabajo mecánico; no cambia la lógica.

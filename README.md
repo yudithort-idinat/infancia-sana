@@ -4,7 +4,10 @@ Plataforma web para que una persona descubra áreas de interés, conozca los ser
 
 **Estado:** versión 1 de demostración. Toda la información (servicios, áreas, contenido de las 12 semanas, personas y casos) es de ejemplo y se validará con MYO Genetics antes de publicar.
 
-## Cómo verla
+## Demo en línea
+**https://yudithort-idinat.github.io/infancia-sana/** — se republica sola con cada cambio en la rama `main`.
+
+## Cómo verla en tu computadora
 Los archivos usan módulos de JavaScript, así que no abren con doble clic. Sirve la carpeta con cualquier servidor estático, por ejemplo:
 
 ```
