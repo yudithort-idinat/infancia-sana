@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infancia Sana · MYO Genetics</title>
+  <meta name="description" content="Descubre tu ruta hacia hábitos más sanos para ti y tu familia. Demostración navegable de la plataforma de MYO Genetics.">
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+
+  <section class="heroe">
+    <div class="contenedor">
+      <div>
+        <span class="etiqueta">MYO Genetics</span>
+        <h1>Hábitos sanos que empiezan en casa</h1>
+        <p class="suave" style="font-size:1.1rem">Infancia Sana es el espacio de MYO Genetics para ayudarte a entender qué necesitas tú y tu familia, elegir el camino correcto y darle seguimiento con acompañamiento profesional.</p>
+        <div class="acciones">
+          <a class="boton primario" href="ruta.html">Descubre tu ruta</a>
+          <a class="boton secundario" href="#servicios">Ver servicios</a>
+        </div>
+        <p class="chico suave" style="margin-top:14px">Los textos de esta página son de ejemplo y se validarán antes de la publicación definitiva.</p>
+      </div>
+      <div class="ilustracion">
+        <h3>¿Cómo funciona?</h3>
+        <ul class="lista">
+          <li><span class="punto"></span><div class="cuerpo"><strong>1. Elige un objetivo</strong><br><span class="suave chico">Nutrición, infancia, bienestar o familia.</span></div></li>
+          <li><span class="punto"></span><div class="cuerpo"><strong>2. Responde unas preguntas</strong><br><span class="suave chico">Cortas, una a la vez.</span></div></li>
+          <li><span class="punto"></span><div class="cuerpo"><strong>3. Recibe una orientación</strong><br><span class="suave chico">Y decide si quieres que te acompañemos.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="objetivos">
+    <div class="contenedor">
+      <h2>¿Qué te interesa explorar?</h2>
+      <p class="suave">Elige un tema. Te mostramos qué tiene que ver contigo y cómo continuar.</p>
+      <div class="rejilla" id="lista-objetivos"></div>
+      <div id="detalle-objetivo" class="tarjeta oculto" style="margin-top:20px"></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="servicios">
+    <div class="contenedor">
+      <div class="fila entre">
+        <div><h2>Servicios</h2><p class="suave">Lo que MYO Genetics puede hacer por ti. <span class="etiqueta ejemplo">Catálogo de ejemplo</span></p></div>
+      </div>
+      <div class="rejilla" id="lista-servicios"></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="contacto">
+    <div class="contenedor">
+      <div class="rejilla dos">
+        <div>
+          <h2>Contacto</h2>
+          <p class="suave">Cuéntanos qué necesitas y te responderemos. También puedes agendar directamente.</p>
+          <div class="tarjeta">
+            <h3>Otras formas de contacto</h3>
+            <ul class="lista">
+              <li><span class="punto"></span><div class="cuerpo"><strong>WhatsApp</strong><br><a href="#" id="enlace-whatsapp" class="chico">Abrir conversación (por definir)</a></div></li>
+              <li><span class="punto"></span><div class="cuerpo"><strong>Agenda</strong><br><a href="#" id="enlace-agenda" class="chico">Elegir día y hora (por definir)</a></div></li>
+              <li><span class="punto"></span><div class="cuerpo"><strong>Correo</strong><br><span class="chico suave">contacto@ejemplo.com</span></div></li>
+            </ul>
+          </div>
+        </div>
+        <form class="tarjeta" id="form-contacto" novalidate>
+          <h3>Escríbenos</h3>
+          <div class="campo"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" required placeholder="Tu nombre"></div>
+          <div class="dos-columnas">
+            <div class="campo"><label for="c-correo">Correo</label><input id="c-correo" name="correo" type="email" required placeholder="tu@correo.com"></div>
+            <div class="campo"><label for="c-tel">Teléfono (opcional)</label><input id="c-tel" name="telefono" placeholder="614 000 0000"></div>
+          </div>
+          <div class="campo"><label for="c-asunto">¿Sobre qué te gustaría orientación?</label>
+            <select id="c-asunto" name="asunto" required>
+              <option value="">Elige una opción</option>
+            </select>
+          </div>
+          <div class="campo"><label for="c-mensaje">Mensaje</label><textarea id="c-mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos brevemente tu situación"></textarea></div>
+          <div class="acciones"><button class="boton primario" type="submit">Enviar mensaje</button><span class="chico suave">Te confirmamos en pantalla al enviarlo.</span></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="pie"></div>
+  <script type="module" src="assets/js/publico.js"></script>
+</body>
+</html>

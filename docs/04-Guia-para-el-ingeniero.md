@@ -1,0 +1,60 @@
+# 04 · Guía para el ingeniero que continúe Infancia Sana
+
+Esta guía está pensada para la persona técnica que MYO Genetics contrate para mejorar la plataforma. Explica cómo está hecho, cómo se publica y por dónde conviene seguir.
+
+## 1. Cómo correrlo
+```
+git clone <repositorio>
+cd infancia-sana
+python -m http.server 8770
+```
+Abre `http://localhost:8770/web/index.html`. Cualquier servidor estático sirve (Node `npx serve`, nginx, Live Server). No hay dependencias ni paso de compilación.
+
+## 2. Estructura
+```
+web/
+  index.html  ruta.html  acceso.html  usuario.html  familia.html  profesional.html  admin.html
+  assets/css/infancia.css        ← estilos; identidad en :root
+  assets/js/api.js               ← ÚNICA puerta a los datos
+  assets/js/auth.js              ← sesión (demo: sessionStorage)
+  assets/js/ui.js                ← encabezado, pie, avisos, ventanas, validación, pestañas
+  assets/js/publico.js ruta.js acceso.js usuario.js familia.js profesional.js admin.js
+  assets/js/demo/base-falsa.js   ← semilla + persistencia en localStorage (demo)
+  assets/js/supabase.js          ← pendiente: fuente real
+supabase/migrations/0001_nucleo.sql  ← esquema propuesto + RLS
+docs/                                ← este material
+```
+
+## 3. Publicar la demo (GitHub Pages)
+1. Subir el repositorio a la cuenta de GitHub de MYO Genetics.
+2. Settings → Pages → Source: *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
+3. La demo queda en `https://<usuario>.github.io/<repo>/web/index.html`. (Si se quiere sin `/web/`, mover el contenido de `web/` a la raíz o agregar un `index.html` raíz que redirija.)
+
+## 4. Conectar la base real (Supabase)
+1. Crear el proyecto en la cuenta de Supabase de MYO Genetics.
+2. Ejecutar `supabase/migrations/0001_nucleo.sql` en el SQL Editor (crea tablas, catálogos y políticas RLS). Las migraciones siguientes se numeran 0002, 0003… y **una migración aplicada no se edita**.
+3. Cargar datos iniciales: `supabase/seed/semilla.sql` (catálogos y programa de 12 semanas; sin personas reales).
+4. En `web/assets/js/supabase.js` poner la URL del proyecto y la **llave pública (anon)**. Nunca la llave de servicio.
+5. Implementar `baseReal` con las mismas cinco funciones que `baseFalsa` (`listar`, `obtener`, `insertar`, `actualizar`, `eliminar`). Hay un ejemplo comentado en el archivo.
+6. En `api.js` cambiar `const fuente = baseFalsa` por `baseReal`.
+7. **Importante:** la base falsa es síncrona; Supabase es asíncrono. Las páginas llaman `api.listar(...)` sin `await`. Al migrar, convertir esas llamadas a `await` (están concentradas en los siete archivos de página y en `avanceMenor` de `api.js`). Es trabajo mecánico; no cambia la lógica.
+8. Autenticación: sustituir `auth.js` por Supabase Auth (correo + contraseña o enlace mágico). La tabla `perfiles` lleva `auth_id` para ligar cada perfil a su usuario de Auth; la página de acceso deja de mostrar perfiles de prueba.
+
+## 5. Seguridad que ya está prevista
+- RLS activo en todas las tablas de datos personales. Las políticas de la migración 0001 implementan la regla «cada perfil ve solo lo suyo» (ver `docs/01-Arquitectura.md` § 3). Revisarlas y probarlas con usuarios reales antes de abrir la plataforma.
+- Los catálogos (`objetivos`, `servicios`, `programa_semanas`) son de lectura pública y escritura solo para administración.
+- `mensajes_contacto` y `recorridos` aceptan inserción anónima (formulario público) y lectura solo de administración.
+- Son datos de menores y de salud: no copiar datos reales a pruebas ni capturas.
+
+## 6. Por dónde seguir (sugerencias, no compromisos)
+- Contenido real: servicios, áreas, preguntas y las 12 semanas (ver `docs/02-Preguntas-abiertas.md`).
+- Identidad visual: logo y colores en `infancia.css` y `ui.js` (`montarEncabezado`).
+- Correos (invitaciones, recordatorios semanales) con un proveedor como Resend o Postmark, desde Edge Functions.
+- Documentos reales en Supabase Storage con políticas por perfil.
+- Exportar reportes (PDF / CSV) para la vista de administración.
+- Notificaciones push o WhatsApp para recordatorios del programa.
+
+## 7. Qué NO hacer
+- No instalar frameworks ni herramientas de compilación sin un motivo de peso: el proyecto es plano a propósito para que sea barato de mantener.
+- No poner llaves secretas en el repositorio.
+- No tocar producción «para ver si funciona»: primero local, luego la base real.

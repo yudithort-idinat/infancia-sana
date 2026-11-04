@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar · Infancia Sana</title>
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+  <main class="seccion">
+    <div class="contenedor" style="max-width:900px">
+      <h1>Entrar</h1>
+      <p class="suave">Elige cómo quieres entrar. En esta demostración no se piden contraseñas: cada tarjeta abre un perfil de prueba con sus propios datos.</p>
+      <p id="acceso-aviso" class="etiqueta aviso oculto" style="margin-bottom:12px"></p>
+
+      <div class="rejilla dos" style="margin-top:20px">
+        <div class="tarjeta">
+          <div class="icono">👋</div>
+          <h3>Soy visitante</h3>
+          <p class="suave chico">Explora sin cuenta: conoce los servicios y haz el recorrido «Descubre tu ruta».</p>
+          <div class="acciones"><a class="boton secundario" href="ruta.html">Descubre tu ruta</a><a class="boton fantasma" href="index.html#servicios">Ver servicios</a></div>
+        </div>
+        <div class="tarjeta">
+          <div class="icono">🔐</div>
+          <h3>Ya tengo cuenta</h3>
+          <p class="suave chico">En la versión real aquí irán correo y contraseña. Para la demostración, elige un perfil de prueba abajo.</p>
+          <form id="form-acceso" novalidate>
+            <div class="campo"><label for="a-correo">Correo</label><input id="a-correo" name="correo" type="email" placeholder="tu@correo.com"></div>
+            <div class="campo"><label for="a-clave">Contraseña</label><input id="a-clave" name="clave" type="password" placeholder="••••••••"></div>
+            <button class="boton primario" type="submit">Entrar</button>
+          </form>
+        </div>
+      </div>
+
+      <h2 style="margin-top:36px">Perfiles de prueba</h2>
+      <p class="suave chico">Cada perfil ve únicamente su propia información.</p>
+      <div class="rejilla" id="perfiles-prueba"></div>
+
+      <h2 style="margin-top:36px">Escuelas, A.C. o gobierno</h2>
+      <p class="suave chico">Acceso de administración para organizaciones que implementan el programa con sus grupos.</p>
+      <div class="rejilla tres" id="perfiles-org"></div>
+    </div>
+  </main>
+  <div id="pie"></div>
+  <script type="module" src="assets/js/acceso.js"></script>
+</body>
+</html>

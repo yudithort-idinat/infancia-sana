@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · Infancia Sana</title>
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+  <main class="seccion" style="padding-top:28px">
+    <div class="contenedor">
+      <div id="admin-titulo"></div>
+      <div class="pestanas">
+        <button data-panel="resumen" type="button">Resumen</button>
+        <button data-panel="usuarios" type="button">Usuarios</button>
+        <button data-panel="catalogo" type="button">Servicios</button>
+        <button data-panel="contenidos" type="button">Contenidos y programas</button>
+        <button data-panel="actividad" type="button">Actividad general</button>
+      </div>
+      <section class="panel" id="resumen"></section>
+      <section class="panel" id="usuarios"></section>
+      <section class="panel" id="catalogo"></section>
+      <section class="panel" id="contenidos"></section>
+      <section class="panel" id="actividad"></section>
+    </div>
+  </main>
+  <div id="pie"></div>
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

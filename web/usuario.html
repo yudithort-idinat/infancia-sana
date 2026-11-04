@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi espacio · Infancia Sana</title>
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+  <main class="seccion" style="padding-top:28px">
+    <div class="contenedor">
+      <div class="pestanas">
+        <button data-panel="inicio" type="button">Inicio</button>
+        <button data-panel="perfil" type="button">Perfil</button>
+        <button data-panel="servicios" type="button">Servicios</button>
+        <button data-panel="seguimiento" type="button">Seguimiento</button>
+      </div>
+      <section class="panel" id="inicio"></section>
+      <section class="panel" id="perfil"></section>
+      <section class="panel" id="servicios"></section>
+      <section class="panel" id="seguimiento"></section>
+    </div>
+  </main>
+  <div id="pie"></div>
+  <script type="module" src="assets/js/usuario.js"></script>
+</body>
+</html>
