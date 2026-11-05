@@ -35,12 +35,14 @@ docs/                                ← este material
 - **Repositorio:** `https://github.com/yudithort-idinat/infancia-sana` (cuenta de MYO Genetics). Un `git push` a `main` republica la demo en uno o dos minutos.
 - **Demo pública (GitHub Pages):** `https://yudithort-idinat.github.io/infancia-sana/` → redirige a `web/index.html`. Configurado en Settings → Pages: *Deploy from a branch*, rama `main`, carpeta `/ (root)`.
 - **Supabase:** proyecto `oraiojohfzfjmdrldlcu` en la organización de MYO Genetics (`https://oraiojohfzfjmdrldlcu.supabase.co`, plan Free, región us-east-2). Ya tiene aplicadas la migración `0001_nucleo.sql` (19 tablas, RLS con 38 políticas) y la semilla `semilla.sql` (5 servicios, 4 objetivos, 12 semanas). La migración está registrada en `supabase_migrations.schema_migrations`.
+- ⚠️ **Versión 2 (4-nov-2026): la migración `0002_etapas_y_seguimiento.sql` y `supabase/seed/semilla_v2.sql` están en el repositorio pero AÚN NO se han aplicado en el proyecto.** La base tiene el esquema de la versión 1. Aplicar primero la 0002 y luego la semilla v2 desde el SQL Editor (ambas van dentro de una transacción) antes de conectar el frontend. No se han probado contra Postgres: revisar el resultado.
 - ⚠️ El plan Free **pausa el proyecto tras una semana sin uso**; se reanuda desde el tablero con un clic (los datos se conservan). Mientras la demo corra con la base falsa, es normal que esté pausado.
 
 ## 4. Conectar la base real (Supabase) — lo que sigue
 1. ~~Crear el proyecto~~ Hecho.
 2. ~~Ejecutar `0001_nucleo.sql`~~ Hecho. Las migraciones siguientes se numeran 0002, 0003… y **una migración aplicada no se edita**.
 3. ~~Cargar `semilla.sql`~~ Hecho.
+3b. **Pendiente:** aplicar `0002_etapas_y_seguimiento.sql` y `semilla_v2.sql` (versión 2). Falta además una función `security definer` para las cifras agregadas de gobierno (ver comentario al final de la 0002).
 4. En `web/assets/js/supabase.js` ya está la URL del proyecto. Falta pegar la **llave pública** (Project Settings → API Keys → *anon* o *publishable*). Nunca la llave de servicio (*service_role* / *secret*).
 5. Implementar `baseReal` con las mismas cinco funciones que `baseFalsa` (`listar`, `obtener`, `insertar`, `actualizar`, `eliminar`). Hay un ejemplo comentado en el archivo.
 6. En `api.js` cambiar `const fuente = baseFalsa` por `baseReal`.
@@ -56,7 +58,9 @@ docs/                                ← este material
 
 ## 6. Por dónde seguir (sugerencias, no compromisos)
 - Contenido real: servicios, áreas, preguntas y las 12 semanas (ver `docs/02-Preguntas-abiertas.md`).
-- Identidad visual: logo y colores en `infancia.css` y `ui.js` (`montarEncabezado`).
+- Identidad visual: ya usa los colores del isotipo de MYO Genetics; falta sustituir `web/assets/img/logo.svg` (aproximación) por el logo original.
+- Reglas reales del programa (metas por edad, alertas, recomendaciones) en `web/assets/js/programa.js`, validadas por profesionales.
+- Consentimiento verificable por correo y aviso de privacidad revisado legalmente (`web/privacidad.html`).
 - Correos (invitaciones, recordatorios semanales) con un proveedor como Resend o Postmark, desde Edge Functions.
 - Documentos reales en Supabase Storage con políticas por perfil.
 - Exportar reportes (PDF / CSV) para la vista de administración.
