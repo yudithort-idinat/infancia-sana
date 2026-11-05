@@ -2,6 +2,11 @@
 
 Bitácora corta. Lo más reciente arriba.
 
+## 2026-11-05 — Migración 0002 aplicada en Supabase
+- Antes de correrla se confirmó con una consulta de solo lectura que las tablas de datos estaban vacías (solo catálogos de ejemplo), así que quitar columnas no perdió información.
+- Se aplicaron la 0002 y la semilla v2 desde el SQL Editor y se registró la versión `0002` en el historial. El esquema de la base ya coincide con la versión 2 de la demo.
+- La demo sigue corriendo con la base falsa del navegador; conectar el frontend sigue siendo trabajo del ingeniero.
+
 ## 2026-11-04 — Versión 2: solicitud de mejoras de MYO Genetics
 - El foco pasa a **familias con menores de 0 a 6 años**, con cinco etapas (embarazo como ruta complementaria, 0–6 meses, 6–12 meses, 1–3 años, 3–6 años). La etapa se calcula con la fecha de nacimiento; ya no se captura edad.
 - El programa de 12 semanas es **por etapa**: 60 semanas de ejemplo, cada una con objetivo, microcontenido, actividad, materiales y pregunta de check-in. Los indicadores, metas y pesos del puntaje también son por etapa.
