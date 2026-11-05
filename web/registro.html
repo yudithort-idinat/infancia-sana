@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrar a mi familia · Infancia Sana</title>
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+  <main class="seccion">
+    <div class="contenedor" style="max-width:760px">
+      <span class="etiqueta acento">Paso 1 de 2 · Cuenta del responsable</span>
+      <h1 style="margin-top:10px">Registra a tu familia</h1>
+      <p class="suave">Una cuenta por madre, padre o persona cuidadora. Después agregas a cada bebé, niña o niño. Pedimos solo lo necesario para empezar; nada de datos sensibles en este primer contacto.</p>
+      <form class="tarjeta" id="form-registro" novalidate>
+        <div class="campo"><label for="r-nombre">Tu nombre</label><input id="r-nombre" name="nombre" required placeholder="Nombre y apellido"></div>
+        <div class="dos-columnas">
+          <div class="campo"><label for="r-correo">Correo</label><input id="r-correo" name="correo" type="email" required placeholder="tu@correo.com"></div>
+          <div class="campo"><label for="r-tel">Teléfono (opcional)</label><input id="r-tel" name="telefono" placeholder="614 000 0000"></div>
+        </div>
+        <div class="campo"><label for="r-rel">Soy</label><select id="r-rel" name="relacion"><option>Madre</option><option>Padre</option><option>Tutor o tutora</option><option>Otra persona cuidadora</option></select></div>
+        <div class="campo"><label for="r-etapa">Etapa de tu familia (puedes cambiarla después)</label><select id="r-etapa" name="etapa_id"></select></div>
+        <div class="campo"><label for="r-clave">Contraseña (solo ilustrativa en la demo)</label><input id="r-clave" name="clave" type="password" placeholder="••••••••"><span class="ayuda">En la versión real la cuenta se creará con correo y contraseña o enlace mágico.</span></div>
+        <div class="campo casilla"><input id="r-consent" name="consentimiento" type="checkbox" required><label for="r-consent">Confirmo que soy madre, padre, tutor o tutora (o persona cuidadora autorizada) y acepto el <a href="privacidad.html" target="_blank">aviso de privacidad</a> de ejemplo. Entiendo que la información de los menores se usa solo para el programa.</label></div>
+        <div class="acciones"><button class="boton primario grande" type="submit">Crear mi cuenta y continuar</button><a class="boton fantasma" href="acceso.html">Ya tengo cuenta</a></div>
+      </form>
+      <p class="chico suave" style="margin-top:14px">Demostración: la cuenta se guarda solo en este navegador. Puedes borrarla con «Reiniciar datos de ejemplo» al pie de la página.</p>
+    </div>
+  </main>
+  <div id="pie"></div>
+  <script type="module" src="assets/js/registro.js"></script>
+</body>
+</html>

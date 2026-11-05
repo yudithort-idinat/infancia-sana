@@ -3,43 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrar · Infancia Sana</title>
+  <title>Ingresa a tu familia · Infancia Sana</title>
   <link rel="stylesheet" href="assets/css/infancia.css">
 </head>
 <body>
   <div id="encabezado"></div>
   <main class="seccion">
-    <div class="contenedor" style="max-width:900px">
-      <h1>Entrar</h1>
-      <p class="suave">Elige cómo quieres entrar. En esta demostración no se piden contraseñas: cada tarjeta abre un perfil de prueba con sus propios datos.</p>
-      <p id="acceso-aviso" class="etiqueta aviso oculto" style="margin-bottom:12px"></p>
+    <div class="contenedor" style="max-width:940px">
+      <h1>Ingresa a tu familia</h1>
+      <p class="suave">Elige cómo quieres entrar. En esta demostración cada tarjeta abre un perfil de prueba con sus propios datos.</p>
+      <p id="acceso-aviso" class="etiqueta aviso oculto" style="margin-bottom:12px;white-space:normal"></p>
 
-      <div class="rejilla dos" style="margin-top:20px">
+      <div class="rejilla tres" style="margin-top:20px">
         <div class="tarjeta">
-          <div class="icono">👋</div>
-          <h3>Soy visitante</h3>
-          <p class="suave chico">Explora sin cuenta: conoce los servicios y haz el recorrido «Descubre tu ruta».</p>
-          <div class="acciones"><a class="boton secundario" href="ruta.html">Descubre tu ruta</a><a class="boton fantasma" href="index.html#servicios">Ver servicios</a></div>
+          <div class="icono calido">👋</div>
+          <h3>Soy nueva o nuevo aquí</h3>
+          <p class="suave chico">Haz el recorrido «Descubre tu ruta» o registra a tu familia para empezar el programa.</p>
+          <div class="acciones"><a class="boton primario" href="registro.html">Registrar a mi familia</a><a class="boton fantasma" href="ruta.html">Descubre tu ruta</a></div>
         </div>
-        <div class="tarjeta">
+        <div class="tarjeta" style="grid-column:span 2">
           <div class="icono">🔐</div>
           <h3>Ya tengo cuenta</h3>
           <p class="suave chico">Entra con tu correo y contraseña de la demostración, o elige un perfil de prueba abajo.</p>
           <form id="form-acceso" novalidate>
-            <div class="campo"><label for="a-correo">Correo</label><input id="a-correo" name="correo" type="email" placeholder="tu@correo.com"></div>
-            <div class="campo"><label for="a-clave">Contraseña</label><input id="a-clave" name="clave" type="password" placeholder="••••••••"></div>
+            <div class="dos-columnas">
+              <div class="campo"><label for="a-correo">Correo</label><input id="a-correo" name="correo" type="email" placeholder="tu@correo.com"></div>
+              <div class="campo"><label for="a-clave">Contraseña</label><input id="a-clave" name="clave" type="password" placeholder="••••••••"></div>
+            </div>
             <button class="boton primario" type="submit">Entrar</button>
           </form>
         </div>
       </div>
 
-      <h2 style="margin-top:36px">Perfiles de prueba</h2>
-      <p class="suave chico">Cada perfil ve únicamente su propia información.</p>
-      <div class="rejilla" id="perfiles-prueba"></div>
+      <h2 style="margin-top:36px">Familias de prueba</h2>
+      <p class="suave chico">Cada familia ve únicamente su propia información. Sin contraseña en la demo.</p>
+      <div class="rejilla" id="perfiles-familia"></div>
+
+      <h2 style="margin-top:36px">Profesionales</h2>
+      <div class="rejilla" id="perfiles-prof"></div>
 
       <h2 style="margin-top:36px">Escuelas, A.C. o gobierno</h2>
-      <p class="suave chico">Acceso de administración para organizaciones que implementan el programa con sus grupos.</p>
+      <p class="suave chico">Acceso de coordinación. Cada organización tiene permisos distintos (se muestran dentro).</p>
       <div class="rejilla tres" id="perfiles-org"></div>
+
+      <h2 style="margin-top:36px">Espacio complementario</h2>
+      <p class="suave chico">Usuario adulto sin menores (ruta complementaria de hábitos del adulto).</p>
+      <div class="rejilla" id="perfiles-usuario"></div>
+
+      <p class="chico suave" style="margin-top:28px">¿Quieres probar todo en orden? Sigue el <a href="prueba.html">recorrido corto de prueba</a>.</p>
     </div>
   </main>
   <div id="pie"></div>

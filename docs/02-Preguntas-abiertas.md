@@ -1,18 +1,25 @@
 # 02 · Preguntas abiertas (para MYO Genetics)
 
-Lo que el documento de referencia no define y se resolvió con un **supuesto de ejemplo**. Cada punto se puede cambiar sin tocar la estructura.
+Lo que los documentos de MYO Genetics no definen y se resolvió con un **supuesto de ejemplo**. Cada punto se puede cambiar sin tocar la estructura.
 
 | # | Pregunta | Supuesto vigente en la demo |
 |---|---|---|
-| 1 | ¿Cuáles son los servicios reales de MYO Genetics, su alcance y precio? | 5 servicios genéricos en `base-falsa.js` → `servicios`, etiquetados «ejemplo». |
-| 2 | ¿Cuáles son las áreas de interés (objetivos) del recorrido y sus preguntas? | 4 áreas con 3–4 preguntas ilustrativas y una orientación general de ejemplo. |
-| 3 | ¿Qué contenido tiene cada una de las 12 semanas de Infancia Sana? | Títulos, texto breve y una actividad por semana, de ejemplo. |
-| 4 | ¿Qué hábitos se registran cada semana y cómo se calcula el avance? | Sueño, frutas y verduras, juego activo, pantallas y agua; puntaje 0–100 con fórmula de ejemplo. |
-| 5 | Logo, colores y tipografía de MYO Genetics. | Paleta provisional en `infancia.css` (`:root`) y logotipo de texto en el encabezado. |
-| 6 | Canal de contacto: WhatsApp, correo, liga de agenda. | Enlaces muestran un aviso «por definir». |
-| 7 | ¿Las escuelas / A.C. / gobierno administran solo a sus usuarios o también ven el catálogo global? | Ven su organización; el catálogo de servicios es global pero pueden activar / desactivar. |
-| 8 | ¿Quién crea los perfiles de menores: la familia o la organización? | La familia, desde su panel. |
-| 9 | ¿Los profesionales pertenecen a una organización o a MYO Genetics? | Ejemplo: pertenecen a la organización que los asigna. |
-| 10 | ¿Qué pasa al terminar las 12 semanas? | Mensaje de cierre y programa marcado como completado; sin siguiente etapa. |
-| 11 | ¿Se necesitan correos automáticos (invitaciones, recordatorios)? | No en la demo. En fase 2 se puede agregar con un proveedor de correo. |
-| 12 | ¿Dominio propio? | Sin definir. GitHub Pages sirve para la demo. |
+| 1 | ¿Cuáles son los servicios reales, su alcance y precio? | 6 servicios genéricos en `base-falsa.js` → `servicios`, etiquetados «ejemplo». |
+| 2 | Contenido real de las 12 semanas **de cada etapa** (objetivo, microcontenido, actividad, materiales, pregunta de check-in). | 60 semanas de ejemplo (5 etapas × 12). Deben escribirlas y validarlas profesionales de MYO Genetics. |
+| 3 | Indicadores del check-in por etapa, sus unidades y **metas** (por ejemplo horas de sueño por edad). | Cinco indicadores por etapa con metas orientativas. **Las metas no son recomendación clínica**: validarlas contra guías pediátricas. |
+| 4 | Fórmula del puntaje y peso de cada indicador por etapa. | Cumplimiento de meta × peso, suma 100. De ejemplo. |
+| 5 | Preguntas de «Descubre tu ruta» por etapa y texto del resultado orientativo. | 4 preguntas por etapa con notas que remiten a semanas del programa. |
+| 6 | ¿La ruta de embarazo dura 12 semanas? ¿Qué pasa al nacer el bebé? | 12 semanas; al registrar la fecha de nacimiento el menor pasa a la etapa 0–6 meses. |
+| 7 | ¿Qué pasa cuando un menor cambia de etapa a mitad del programa (por ejemplo cumple 6 meses)? | La etapa se recalcula con la fecha; el avance es por menor. **Falta decidir** si termina la etapa actual o brinca a la nueva. |
+| 8 | Reglas de alertas para el profesional y umbrales. | Sin línea base, 14 días sin check-in, indicador bajo dos veces seguidas, fuera de rango de edad. |
+| 9 | ¿Quién redacta las recomendaciones automáticas y con qué reglas? | El sistema «sugiere» textos fijos de ejemplo; el profesional valida. La lógica real está por definirse. |
+| 10 | Permisos exactos de escuela, A.C. y gobierno. | Ver pestaña «Permisos» de coordinación y `organizaciones.permisos`. Gobierno: solo agregados. |
+| 11 | ¿Qué mediciones registra el profesional (peso, talla, perímetro cefálico, otras)? | Peso, talla y perímetro cefálico. |
+| 12 | Personaje del programa: ¿se quiere? nombre e ilustración. | «Brote» (hoja), provisional, discreto para no infantilizar. |
+| 13 | Logo original, tipografía y manual de marca. | Colores tomados del isotipo; `logo.svg` es una aproximación vectorial. Falta el archivo original. |
+| 14 | Fotografías o ilustraciones propias. | Ilustración vectorial genérica en el héroe. |
+| 15 | Aviso de privacidad, razón social y mecanismo de consentimiento verificable. | Borrador en `privacidad.html`; casilla de consentimiento con fecha y versión. Requiere revisión legal. |
+| 16 | Canales de contacto y de recordatorios (correo, WhatsApp). | Enlaces «por definir»; recordatorios solo en pantalla. |
+| 17 | ¿Quién crea los perfiles de menores: la familia o la organización? | La familia. La organización solo invita. |
+| 18 | ¿Se conserva el espacio del usuario adulto? | Sí, como espacio complementario, fuera del flujo principal. |
+| 19 | Dominio propio. | Sin definir. GitHub Pages sirve para la demo. |

@@ -1,4 +1,4 @@
-// Piezas de interfaz compartidas: encabezado, avisos, ventanas, validación de formularios.
+// Piezas de interfaz compartidas: encabezado, pie, avisos, ventanas, validación de formularios, guía.
 import { sesionActual, salir, PAGINA_POR_ROL } from './auth.js';
 import { api } from './api.js';
 
@@ -19,31 +19,31 @@ const NOMBRE_ROL = { usuario: 'Usuario', familia: 'Familia', profesional: 'Profe
 export function montarEncabezado(activo = '') {
   const s = sesionActual();
   const enlacesPublicos = [
-    ['index.html#objetivos', 'Objetivos', 'objetivos'],
-    ['index.html#servicios', 'Servicios', 'servicios'],
+    ['index.html#programa', 'El programa', 'programa'],
+    ['index.html#etapas', 'Etapas', 'etapas'],
+    ['ruta.html', 'Descubre tu ruta', 'ruta'],
     ['index.html#contacto', 'Contacto', 'contacto'],
   ];
   let derecha = '';
   if (s) {
     const destino = PAGINA_POR_ROL[s.rol] || 'index.html';
     derecha = `<span class="sesion">
-      <a href="${destino}" class="${activo === 'espacio' ? 'activo' : ''}">Mi espacio</a>
+      <a href="${destino}" class="${activo === 'espacio' ? 'activo' : ''}">${s.rol === 'familia' ? 'Mi familia' : 'Mi espacio'}</a>
       <span class="avatar" title="${escapar(s.perfil.nombre)}">${iniciales(s.perfil.nombre)}</span>
       <span class="chico suave">${escapar(s.perfil.nombre.split(' ')[0])} · ${NOMBRE_ROL[s.rol] || s.rol}</span>
       <button class="boton chico secundario" id="btn-salir" type="button">Salir</button>
     </span>`;
   } else {
-    derecha = `<span class="sesion"><a href="acceso.html" class="boton chico primario">Entrar</a></span>`;
+    derecha = `<span class="sesion"><a href="acceso.html" class="boton chico primario">Ingresa a tu familia</a></span>`;
   }
   const html = `
-  <div class="aviso-demo">Versión 1 de demostración · Todos los datos, servicios y contenidos son de ejemplo.</div>
+  <div class="aviso-demo">Versión 2 de demostración · Todos los datos, textos y contenidos del programa son de ejemplo.</div>
   <header class="encabezado">
     <div class="contenedor">
-      <a class="logo" href="index.html"><span class="marca">🌱</span><span>Infancia Sana<small>por MYO Genetics</small></span></a>
+      <a class="logo" href="index.html"><span class="marca"><img src="assets/img/logo.svg" alt="MYO Genetics"></span><span>Infancia Sana<small>Un programa de MYO Genetics</small></span></a>
       <button class="menu-boton" id="btn-menu" type="button" aria-label="Abrir menú">☰</button>
       <nav class="nav" id="nav-principal">
         ${enlacesPublicos.map(([h, t, k]) => `<a href="${h}" class="${activo === k ? 'activo' : ''}">${t}</a>`).join('')}
-        <a href="ruta.html" class="${activo === 'ruta' ? 'activo' : ''}">Descubre tu ruta</a>
         ${derecha}
       </nav>
     </div>
@@ -56,15 +56,20 @@ export function montarEncabezado(activo = '') {
 
 export function montarPie() {
   const html = `<footer class="pie"><div class="contenedor">
-    <span>© ${new Date().getFullYear()} MYO Genetics · Infancia Sana · versión 1 (demo)</span>
-    <span class="fila"><a href="index.html">Inicio</a> · <a href="ruta.html">Descubre tu ruta</a> · <a href="acceso.html">Entrar</a> · <button class="boton chico fantasma" id="btn-reiniciar" type="button">Reiniciar datos de ejemplo</button></span>
+    <span>© ${new Date().getFullYear()} MYO Genetics · Infancia Sana · versión 2 (demo)</span>
+    <span class="fila"><a href="index.html">Inicio</a> · <a href="ruta.html">Descubre tu ruta</a> · <a href="privacidad.html">Privacidad</a> · <a href="prueba.html">Recorrido de prueba</a> · <button class="boton chico fantasma" id="btn-reiniciar" type="button">Reiniciar datos de ejemplo</button></span>
   </div></footer>`;
   const punto = $('#pie');
   if (punto) punto.outerHTML = html; else document.body.insertAdjacentHTML('beforeend', html);
   $('#btn-reiniciar')?.addEventListener('click', async () => {
     const ok = await confirmar('Reiniciar datos de ejemplo', 'Se borrarán los cambios hechos en esta demostración y volverán los datos originales. ¿Continuar?');
-    if (ok) { api.reiniciar(); aviso('Datos de ejemplo restaurados', 'ok'); setTimeout(() => location.reload(), 600); }
+    if (ok) { api.reiniciar(); sessionStorage.clear(); aviso('Datos de ejemplo restaurados', 'ok'); setTimeout(() => { location.href = 'index.html'; }, 600); }
   });
+}
+
+// Guía del programa (personaje PROPUESTO, nombre provisional «Brote»; por validar con MYO Genetics)
+export function guia(texto, titulo = 'Brote, tu guía del programa') {
+  return `<div class="guia"><div class="cara">🌿</div><div><strong>${escapar(titulo)}</strong><p>${texto}</p></div></div>`;
 }
 
 // Aviso emergente breve
@@ -96,7 +101,7 @@ export function ventana({ titulo, html, botones = [{ texto: 'Cerrar', clase: 'se
     const cerrar = (valor) => {
       // Guardamos lo capturado en la ventana antes de cerrarla
       ultimaVentana.campos = {};
-      $$('input, select, textarea', velo).forEach((el) => { const k = el.name || el.id; if (k) ultimaVentana.campos[k] = el.type === 'checkbox' ? el.checked : el.value; });
+      $$('input, select, textarea', velo).forEach((el) => { const k = el.name || el.id; if (!k) return; if (el.type === 'radio') { if (el.checked) ultimaVentana.campos[k] = el.value; return; } ultimaVentana.campos[k] = el.type === 'checkbox' ? el.checked : el.value; });
       velo.classList.remove('visible'); velo.innerHTML = ''; resolver(valor);
     };
     $$('.acciones button', velo).forEach((b) => b.addEventListener('click', () => cerrar(botones[Number(b.dataset.i)].valor)));
@@ -123,7 +128,7 @@ export function validar(form) {
         campo.classList.add('invalido');
         let msg = $('.mensaje-error', campo);
         if (!msg) { msg = document.createElement('span'); msg.className = 'mensaje-error'; campo.appendChild(msg); }
-        msg.textContent = malCorreo ? 'Escribe un correo válido.' : 'Este campo es necesario.';
+        msg.textContent = malCorreo ? 'Escribe un correo válido.' : input.type === 'checkbox' ? 'Necesitamos tu confirmación.' : 'Este campo es necesario.';
       }
     }
   });
@@ -154,4 +159,9 @@ export function activarPestanas(contenedor, inicial) {
   const desdeUrl = location.hash.replace('#', '');
   mostrar(botones.some((b) => b.dataset.panel === desdeUrl) ? desdeUrl : inicial || botones[0]?.dataset.panel);
   return mostrar;
+}
+
+// Barras horizontales sencillas: filas = [{etiqueta, valor, max, texto}]
+export function barras(filas) {
+  return `<div class="barras">${filas.map((f) => `<div class="barra"><span>${escapar(f.etiqueta)}</span><div class="pista"><span style="width:${Math.max(0, Math.min(100, (f.valor / (f.max || 100)) * 100))}%"></span></div><span class="valor">${escapar(f.texto ?? f.valor)}</span></div>`).join('')}</div>`;
 }

@@ -1,52 +1,72 @@
-// Página pública: objetivos, servicios y contacto.
+// Página pública: programa, etapas, servicios y contacto.
 import { api, hoyISO } from './api.js';
+import { etapasTodas, semanasDe } from './programa.js';
 import { $, $$, escapar, montarEncabezado, montarPie, aviso, ventana, validar, datosFormulario } from './ui.js';
 
 montarEncabezado('inicio');
 montarPie();
 
-const objetivos = api.listar('objetivos');
+const etapas = etapasTodas();
 const servicios = api.listar('servicios');
 
-// ---------- Objetivos ----------
-const listaObj = $('#lista-objetivos');
-listaObj.innerHTML = objetivos.map((o) => `
-  <button class="tarjeta clic" data-objetivo="${o.id}" type="button" style="text-align:left;font:inherit">
-    <div class="icono">${o.icono}</div>
-    <h3>${escapar(o.nombre)}</h3>
-    <p class="suave chico">${escapar(o.descripcion)}</p>
-    <span class="chico" style="color:var(--primario-osc);font-weight:700">Elegir →</span>
+// ---------- Semana de ejemplo (programa como protagonista) ----------
+const ejemplo = semanasDe('1-3a')[2];
+$('#semana-ejemplo').innerHTML = `
+  <span class="etiqueta ejemplo">Ejemplo · etapa 1 a 3 años · semana ${ejemplo.numero}</span>
+  <h3 style="margin-top:10px">${escapar(ejemplo.titulo)}</h3>
+  <p class="chico"><strong>Objetivo:</strong> ${escapar(ejemplo.objetivo)}</p>
+  <p class="chico">${escapar(ejemplo.contenido)}</p>
+  <p class="chico"><strong>Actividad en casa:</strong> ${escapar(ejemplo.actividad)}</p>
+  <p class="chico"><strong>Materiales:</strong> ${escapar(ejemplo.materiales)}</p>
+  <p class="chico"><strong>Check-in:</strong> indicadores de la etapa + «${escapar(ejemplo.checkin)}»</p>
+  <a class="boton chico primario" href="acceso.html">Ver el programa completo en el área familiar</a>`;
+
+// ---------- Etapas ----------
+const listaEt = $('#lista-etapas');
+listaEt.innerHTML = etapas.map((e) => `
+  <button class="tarjeta clic etapa-tarjeta" data-etapa="${e.id}" type="button" style="text-align:left;font:inherit;--color-etapa:${e.color}">
+    <div class="icono">${e.icono}</div>
+    <h3 style="font-size:1rem">${escapar(e.nombre)}</h3>
+    <p class="suave chico" style="margin:0 0 8px">${escapar(e.rango)}</p>
+    ${e.complementaria ? '<span class="etiqueta gris">Ruta complementaria</span>' : '<span class="etiqueta">Programa 12 semanas</span>'}
   </button>`).join('');
 
-const detalle = $('#detalle-objetivo');
-function mostrarObjetivo(id) {
-  const o = objetivos.find((x) => x.id === id);
-  if (!o) return;
-  $$('[data-objetivo]', listaObj).forEach((b) => b.classList.toggle('elegida', b.dataset.objetivo === id));
-  const relacionados = o.servicios.map((sid) => servicios.find((s) => s.id === sid)).filter(Boolean);
+const detalle = $('#detalle-etapa');
+function mostrarEtapa(id) {
+  const e = etapas.find((x) => x.id === id);
+  if (!e) return;
+  $$('[data-etapa]', listaEt).forEach((b) => b.classList.toggle('elegida', b.dataset.etapa === id));
+  const semanas = semanasDe(e.id);
   detalle.classList.remove('oculto');
+  detalle.style.setProperty('--color-etapa', e.color);
   detalle.innerHTML = `
     <div class="fila entre">
-      <div><span class="etiqueta">Elegiste</span><h3 style="margin-top:8px">${o.icono} ${escapar(o.nombre)}</h3></div>
+      <div><span class="etiqueta" style="background:color-mix(in srgb,${e.color} 15%,#fff);color:${e.color}">${e.icono} ${escapar(e.nombre)}</span><h3 style="margin-top:8px">${escapar(e.descripcion)}</h3></div>
     </div>
-    <p>${escapar(o.descripcion)}</p>
-    <p class="chico"><strong>Para quién:</strong> ${escapar(o.para_quien)}</p>
-    <h4 style="margin-top:14px">Servicios relacionados</h4>
-    <ul class="lista">${relacionados.map((s) => `<li><span class="punto"></span><div class="cuerpo"><strong>${escapar(s.nombre)}</strong><br><span class="chico suave">${escapar(s.descripcion)}</span></div></li>`).join('')}</ul>
+    <div class="rejilla dos" style="margin-top:12px">
+      <div>
+        <h4 style="margin-top:0">Las 12 semanas (ejemplo)</h4>
+        <ol class="chico" style="margin:0;padding-left:18px;columns:2;column-gap:18px">${semanas.map((s) => `<li style="margin-bottom:3px">${escapar(s.titulo)}</li>`).join('')}</ol>
+      </div>
+      <div>
+        <h4 style="margin-top:0">Qué se registra cada semana</h4>
+        <ul class="lista compacta">${e.indicadores.map((i) => `<li><span class="punto-etapa" style="--color-etapa:${e.color};margin-top:8px"></span><div class="cuerpo chico">${escapar(i.etiqueta)} <span class="suave">(${i.meta.tipo === 'min' ? 'meta: al menos' : 'meta: máximo'} ${i.meta.valor} ${escapar(i.unidad)})</span></div></li>`).join('')}</ul>
+      </div>
+    </div>
     <div class="acciones" style="margin-top:16px">
-      <a class="boton primario" href="ruta.html?objetivo=${o.id}">Continuar con este objetivo</a>
-      <a class="boton secundario" href="#servicios">Ver todos los servicios</a>
+      <a class="boton primario" href="ruta.html?etapa=${e.id}">Descubre tu ruta en esta etapa</a>
+      <a class="boton secundario" href="registro.html?etapa=${e.id}">Registrar a mi familia</a>
     </div>`;
   detalle.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
-listaObj.addEventListener('click', (e) => { const b = e.target.closest('[data-objetivo]'); if (b) mostrarObjetivo(b.dataset.objetivo); });
+listaEt.addEventListener('click', (e) => { const b = e.target.closest('[data-etapa]'); if (b) mostrarEtapa(b.dataset.etapa); });
 
 // ---------- Servicios ----------
 $('#lista-servicios').innerHTML = servicios.map((s) => `
   <div class="tarjeta">
     <h3>${escapar(s.nombre)}</h3>
     <p class="suave chico">${escapar(s.descripcion)}</p>
-    <p class="chico"><strong>Útil para:</strong> ${escapar(s.para_quien)}</p>
+    <p class="chico"><strong>Para quién:</strong> ${escapar(s.para_quien)}</p>
     <div class="acciones">
       <button class="boton chico secundario" data-conocer="${s.id}" type="button">Conocer más</button>
       <button class="boton chico primario" data-solicitar="${s.id}" type="button">Solicitar orientación</button>
@@ -76,7 +96,7 @@ function irAContacto(servicioId) {
 const sel = $('#c-asunto');
 sel.innerHTML = '<option value="">Elige una opción</option>' + servicios.map((s) => `<option value="${s.id}">${escapar(s.nombre)}</option>`).join('') + '<option value="otro">Otro tema</option>';
 
-// Si venimos del recorrido con un objetivo, se preselecciona
+// Si venimos del recorrido, se preselecciona
 try {
   const previo = JSON.parse(sessionStorage.getItem('infancia_contacto_previo') || 'null');
   if (previo) {
@@ -100,6 +120,6 @@ $('#form-contacto').addEventListener('submit', async (e) => {
 $('#enlace-whatsapp').addEventListener('click', (e) => { e.preventDefault(); aviso('El número de WhatsApp se definirá con MYO Genetics'); });
 $('#enlace-agenda').addEventListener('click', (e) => { e.preventDefault(); aviso('La liga de agenda se definirá con MYO Genetics'); });
 
-// Si la URL trae #objetivos con ?objetivo=, se abre
-const param = new URLSearchParams(location.search).get('objetivo');
-if (param) mostrarObjetivo(param);
+// Si la URL trae ?etapa=, se abre
+const param = new URLSearchParams(location.search).get('etapa');
+if (param) mostrarEtapa(param);

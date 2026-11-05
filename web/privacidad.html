@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacidad y consentimiento · Infancia Sana</title>
+  <link rel="stylesheet" href="assets/css/infancia.css">
+</head>
+<body>
+  <div id="encabezado"></div>
+  <main class="seccion">
+    <div class="contenedor" style="max-width:820px">
+      <span class="etiqueta ejemplo">Borrador de ejemplo · debe revisarlo un abogado antes de usarse</span>
+      <h1 style="margin-top:10px">Privacidad, consentimiento y operación</h1>
+      <p class="suave">Cómo propone la plataforma tratar la información de las familias y de los menores. Esta página es una plantilla para que MYO Genetics la complete con su razón social, domicilio y datos de contacto, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
+
+      <div class="tarjeta" style="margin-top:20px">
+        <h2>1. Consentimiento verificable del padre, madre o tutor</h2>
+        <ul class="lista compacta">
+          <li><span class="punto"></span><div class="cuerpo">Ningún perfil de menor se crea sin que una persona adulta confirme que es madre, padre, tutor o tutora (casilla obligatoria con fecha y versión del aviso aceptado).</div></li>
+          <li><span class="punto"></span><div class="cuerpo">En la versión real se propone <strong>verificación por correo</strong> (enlace de confirmación) y, para instituciones, <strong>carta de consentimiento firmada</strong> que la coordinación registra.</div></li>
+          <li><span class="punto"></span><div class="cuerpo">El consentimiento se puede retirar: la familia pide la baja y sus datos se eliminan o anonimizan en un plazo definido.</div></li>
+        </ul>
+      </div>
+      <div class="tarjeta" style="margin-top:16px">
+        <h2>2. Qué datos se piden y para qué</h2>
+        <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Dato</th><th>Para qué</th><th>Quién lo ve</th></tr></thead><tbody>
+          <tr><td>Nombre y correo del responsable</td><td>Crear la cuenta y enviar recordatorios</td><td>La familia, su profesional asignado y la coordinación de su organización</td></tr>
+          <tr><td>Nombre o apodo y fecha de nacimiento del menor</td><td>Calcular la etapa del programa</td><td>La familia, su profesional y la coordinación (solo nombre y etapa)</td></tr>
+          <tr><td>Check-ins semanales y línea base</td><td>Mostrar el avance y el antes/después</td><td>La familia y su profesional; la coordinación solo en cifras agregadas</td></tr>
+          <tr><td>Mediciones (peso, talla)</td><td>Seguimiento preventivo</td><td>La familia y su profesional</td></tr>
+          <tr><td>Notas del profesional</td><td>Continuidad del seguimiento</td><td>Solo el profesional asignado</td></tr>
+          <tr><td>Gobierno / enlaces institucionales</td><td>Informes de cobertura</td><td>Solo cifras agregadas, nunca nombres</td></tr>
+        </tbody></table></div>
+        <p class="chico suave" style="margin:10px 0 0">No se piden en el primer contacto: diagnósticos, CURP, fotografías, domicilio exacto ni datos de otros familiares. Son datos de menores y de salud: se tratan como <strong>datos personales sensibles</strong>.</p>
+      </div>
+      <div class="tarjeta" style="margin-top:16px">
+        <h2>3. Permisos por rol y seguridad</h2>
+        <ul class="lista compacta">
+          <li><span class="punto"></span><div class="cuerpo"><strong>Cada perfil ve solo lo suyo.</strong> En la base de datos real esto se aplica con políticas de seguridad a nivel de fila (RLS en Supabase), no solo en pantalla.</div></li>
+          <li><span class="punto"></span><div class="cuerpo"><strong>Acceso con contraseña o enlace mágico</strong> y cierre de sesión automático; opción de verificación en dos pasos para profesionales y coordinación.</div></li>
+          <li><span class="punto"></span><div class="cuerpo"><strong>Cifrado</strong> en tránsito (HTTPS) y en reposo; llaves de servicio nunca en el navegador.</div></li>
+          <li><span class="punto"></span><div class="cuerpo"><strong>Bitácora</strong> de quién consulta o cambia datos sensibles (notas, mediciones, consentimientos).</div></li>
+        </ul>
+      </div>
+      <div class="tarjeta" style="margin-top:16px">
+        <h2>4. Respaldo y conservación</h2>
+        <ul class="lista compacta">
+          <li><span class="punto"></span><div class="cuerpo">Respaldos automáticos diarios de la base de datos (incluidos en los planes de pago de Supabase) y prueba de restauración cada cierto tiempo.</div></li>
+          <li><span class="punto"></span><div class="cuerpo">Conservación mientras la familia participe más un plazo definido (por ejemplo, 12 meses); después, eliminación o anonimización para estadísticas.</div></li>
+          <li><span class="punto"></span><div class="cuerpo">Exportación de datos a petición de la familia (derechos ARCO: acceso, rectificación, cancelación y oposición).</div></li>
+        </ul>
+      </div>
+      <div class="tarjeta" style="margin-top:16px">
+        <h2>5. Información de salud</h2>
+        <p class="chico">La plataforma es educativa y de seguimiento preventivo. No emite diagnósticos ni sustituye la atención médica. Las recomendaciones que se muestran a las familias son validadas por una persona profesional; las alertas automáticas son avisos internos para el profesional, no para la familia.</p>
+      </div>
+      <div class="tarjeta calida" style="margin-top:16px">
+        <h2>Antes de usar datos reales</h2>
+        <ol class="chico" style="margin:0;padding-left:18px">
+          <li>Aviso de privacidad completo y revisado legalmente, publicado en esta página.</li>
+          <li>Consentimiento verificable activado (correo de confirmación o carta firmada).</li>
+          <li>Cuentas reales con contraseña (Supabase Auth) y políticas RLS probadas con usuarios de cada rol.</li>
+          <li>Respaldos activos y persona responsable de datos designada.</li>
+          <li>Eliminar los perfiles de prueba y los datos de ejemplo.</li>
+        </ol>
+      </div>
+      <p class="chico suave" style="margin-top:16px"><a href="index.html">← Volver al inicio</a></p>
+    </div>
+  </main>
+  <div id="pie"></div>
+  <script type="module">
+    import { montarEncabezado, montarPie } from './assets/js/ui.js';
+    montarEncabezado('privacidad'); montarPie();
+  </script>
+</body>
+</html>

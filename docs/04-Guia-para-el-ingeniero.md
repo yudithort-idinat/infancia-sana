@@ -18,10 +18,16 @@ web/
   assets/js/api.js               ← ÚNICA puerta a los datos
   assets/js/auth.js              ← sesión (demo: sessionStorage)
   assets/js/ui.js                ← encabezado, pie, avisos, ventanas, validación, pestañas
-  assets/js/publico.js ruta.js acceso.js usuario.js familia.js profesional.js admin.js
+  registro.html  reporte.html  privacidad.html  prueba.html
+  assets/js/programa.js          ← reglas del programa (etapas, avance, puntaje, logros, alertas, métricas)
+  assets/js/publico.js ruta.js registro.js acceso.js usuario.js familia.js profesional.js admin.js reporte.js
+  assets/img/logo.svg            ← isotipo (aproximación vectorial; sustituir por el original)
   assets/js/demo/base-falsa.js   ← semilla + persistencia en localStorage (demo)
   assets/js/supabase.js          ← pendiente: fuente real
-supabase/migrations/0001_nucleo.sql  ← esquema propuesto + RLS
+supabase/migrations/0001_nucleo.sql  ← esquema base + RLS
+supabase/migrations/0002_etapas_y_seguimiento.sql  ← versión 2: etapas, evaluaciones, mediciones, recomendaciones
+supabase/seed/semilla.sql, semilla_v2.sql          ← catálogos de ejemplo
+scripts/generar-semilla.mjs          ← regenera semilla_v2.sql desde la demo
 docs/                                ← este material
 ```
 

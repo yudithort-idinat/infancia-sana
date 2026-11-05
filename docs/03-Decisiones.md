@@ -2,6 +2,18 @@
 
 Bitácora corta. Lo más reciente arriba.
 
+## 2026-11-04 — Versión 2: solicitud de mejoras de MYO Genetics
+- El foco pasa a **familias con menores de 0 a 6 años**, con cinco etapas (embarazo como ruta complementaria, 0–6 meses, 6–12 meses, 1–3 años, 3–6 años). La etapa se calcula con la fecha de nacimiento; ya no se captura edad.
+- El programa de 12 semanas es **por etapa**: 60 semanas de ejemplo, cada una con objetivo, microcontenido, actividad, materiales y pregunta de check-in. Los indicadores, metas y pesos del puntaje también son por etapa.
+- Se agregan **línea base** (obligatoria para abrir la semana 1) y **evaluación de cierre** para el antes/después.
+- **Mediciones verificadas** (profesional) separadas de las **reportadas** (familia). **Recomendaciones**: el sistema sugiere, el profesional valida y solo entonces la familia las ve.
+- Instituciones con **permisos distintos**; gobierno ve solo cifras agregadas, sin nombres (`organizaciones.alcance = 'agregado'`).
+- Reglas del programa concentradas en `web/assets/js/programa.js` para que el ingeniero las ajuste en un solo lugar.
+- Identidad: se adoptan los **colores del isotipo de MYO Genetics** (púrpura y turquesa). El logo llegó como imagen pegada en una conversación, no como archivo: `logo.svg` es una aproximación vectorial hasta tener el original.
+- Personaje «Brote»: propuesta discreta, por validar.
+- Base real: migración `0002_etapas_y_seguimiento.sql` y `supabase/seed/semilla_v2.sql` (generada con `scripts/generar-semilla.mjs`). Estado de aplicación en `docs/04` § 3.
+- Detalle punto por punto en `docs/05-Solicitud-de-mejoras-v2.md`.
+
 ## 2026-11-03 — Montado en las cuentas de MYO Genetics
 - Repositorio público `yudithort-idinat/infancia-sana` con GitHub Pages desde `main` (demo en `https://yudithort-idinat.github.io/infancia-sana/`). Público porque el plan gratuito de GitHub solo publica Pages de repos públicos; no contiene datos personales ni secretos.
 - Se reutilizó el proyecto de Supabase que ya existía en su organización (estaba pausado y vacío) en lugar de crear otro: evita una contraseña nueva de base de datos. Migración 0001 y semilla aplicadas desde el SQL Editor.

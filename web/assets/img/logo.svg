@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="MYO Genetics">
+  <!-- Versión vectorial APROXIMADA del isotipo de MYO Genetics (tres trazos envolventes y un punto).
+       Sustituir por el archivo original (logo.png) cuando MYO Genetics lo entregue. -->
+  <defs>
+    <linearGradient id="pur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B1FA6"/><stop offset="1" stop-color="#9B4DE0"/></linearGradient>
+    <linearGradient id="tur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B3FD9"/><stop offset="1" stop-color="#2EC4D6"/></linearGradient>
+    <linearGradient id="cia" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#2EC4D6"/><stop offset="1" stop-color="#7FE6EC"/></linearGradient>
+  </defs>
+  <g transform="translate(100 100)">
+    <path d="M-62 -20 C -70 -60, -20 -82, 18 -70 C 40 -63, 48 -50, 40 -42 C 20 -58, -22 -62, -40 -38 C -50 -26, -56 -18, -62 -20 Z" fill="url(#pur)"/>
+    <path d="M58 -30 C 85 -5, 78 45, 40 66 C 20 76, 2 72, 4 60 C 28 56, 56 36, 56 6 C 56 -10, 54 -22, 58 -30 Z" fill="url(#cia)"/>
+    <path d="M-52 30 C -70 60, -30 90, 10 76 C 30 70, 40 58, 32 52 C 10 66, -26 58, -36 36 C -42 24, -46 18, -52 30 Z" fill="url(#tur)"/>
+    <circle cx="0" cy="4" r="22" fill="#6B2FBF"/>
+  </g>
+</svg>

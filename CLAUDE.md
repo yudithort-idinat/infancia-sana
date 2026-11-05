@@ -15,7 +15,9 @@ Eres el ingeniero de cabecera de la plataforma Infancia Sana de MYO Genetics. Es
 - **Cada perfil ve solo lo suyo.** Las páginas filtran por `perfil_id`, `responsable_id`, `profesional_id` u `organizacion_id`. En la base real esto se refuerza con RLS (ver migración 0001).
 - **Todo botón hace algo.** Si una función aún no existe, el botón muestra un aviso claro («se definirá con MYO Genetics»), nunca queda decorativo.
 - **Sin secretos en el repo.** Solo URL del proyecto y llave pública (anon) en el frontend.
-- **Si cambias la semilla** de `base-falsa.js`, sube la constante `VER` para que los navegadores recarguen los datos.
+- **Si cambias la semilla** de `base-falsa.js`, sube la constante `VER` para que los navegadores recarguen los datos y regenera `supabase/seed/semilla_v2.sql` con `node scripts/generar-semilla.mjs`.
+- **Las reglas del programa viven en `web/assets/js/programa.js`** (etapa por edad, avance, puntaje por etapa, logros, pendientes, alertas, métricas). No las dupliques en las páginas.
+- **Datos de menores y de salud.** Ningún perfil de menor sin consentimiento del responsable; la familia solo ve recomendaciones validadas por un profesional; gobierno solo ve cifras agregadas.
 
 ## Cómo correr en local
 ```

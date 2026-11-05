@@ -32,6 +32,9 @@ export const ESTADOS = {
   cerrado: { texto: 'Cerrado', clase: 'gris' },
   publicado: { texto: 'Publicado', clase: 'ok' },
   borrador: { texto: 'Borrador', clase: 'gris' },
+  validada: { texto: 'Validada', clase: 'ok' },
+  descartada: { texto: 'Descartada', clase: 'gris' },
+  concluido: { texto: 'Concluido', clase: 'ok' },
   'en curso': { texto: 'En curso', clase: '' },
   'por iniciar': { texto: 'Por iniciar', clase: 'aviso' },
 };
@@ -54,13 +57,4 @@ export function hoyISO() { return new Date().toISOString().slice(0, 10); }
 export function registrarActividad(organizacion_id, texto) {
   if (!organizacion_id) return;
   api.insertar('actividad_general', { organizacion_id, fecha: hoyISO(), texto });
-}
-
-// Avance de un menor en el programa (0-12 semanas completadas)
-export function avanceMenor(menor_id) {
-  const hechas = api.listar('avance_semanal', { menor_id }).filter((a) => a.completada).map((a) => a.semana);
-  const total = api.listar('programa_semanas').length || 12;
-  const completadas = hechas.length;
-  const semanaActiva = Math.min(total, completadas + 1);
-  return { completadas, total, semanaActiva, porcentaje: Math.round((completadas / total) * 100), hechas };
 }
